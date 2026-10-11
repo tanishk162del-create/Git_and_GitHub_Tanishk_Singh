@@ -2,16 +2,21 @@
   {
     "id": 1,
     "name": "Tanishk",
-    "role": "Developer"
+    "role": "Full Stack Developer"
   },
   {
     "id": 2,
     "name": "Aarav",
-    "role": "Tester"
+    "role": "QA Engineer"
   },
   {
     "id": 3,
     "name": "Priya",
-    "role": "Analyst"
+    "role": "Data Analyst"
+  },
+  {
+    "id": 4,
+    "name": "Rohan",
+    "role": "DevOps Engineer"
   }
 ]
