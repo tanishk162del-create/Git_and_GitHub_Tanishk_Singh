@@ -27,6 +27,31 @@ def get_collection():
     collection_name = os.getenv("MONGO_COLLECTION", "submissions")
     return client[db_name][collection_name]
 
+@app.route("/submittodoitem", methods=["POST"])
+def submit_todo_item():
+    item_name = request.form.get("itemName", "").strip()
+    item_description = request.form.get("itemDescription", "").strip()
+
+    if not item_name or not item_description:
+        return jsonify({
+            "error": "Item Name and Item Description are required."
+        }), 400
+
+    try:
+        collection = get_collection()
+        result = collection.insert_one({
+            "itemName": item_name,
+            "itemDescription": item_description
+        })
+
+        return jsonify({
+            "message": "To-Do item saved successfully.",
+            "insertedId": str(result.inserted_id)
+        }), 201
+
+    except (RuntimeError, PyMongoError) as exc:
+        return jsonify({"error": f"Database error: {exc}"}), 500
+    
 
 @app.route("/api")
 def api():
